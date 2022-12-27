@@ -44,7 +44,7 @@ class HttpService() {
       case req @ POST -> Root / "users" =>
         req.as[UserForm].flatMap { userForm =>
           val user = User(Random.nextInt(1000), userForm.username, userForm.email, userForm.age)
-          UserService.save(user).flatMap(_ => Created(s"User with id: ${user.id}")).handleErrorWith(errorHandler)
+          UserService.save(user).flatMap(_ => Created(s"User with id: ${user.id} created")).handleErrorWith(errorHandler)
         }
 
       case req @ PUT -> Root / "users" / LongVar(id) =>
